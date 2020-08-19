@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <h2>React in browser</h2>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam, odio autem? Recusandae dolores adipisci sint doloribus sed. Consequuntur inventore magni modi explicabo optio aspernatur quam earum accusamus ab quo. Perferendis.</p>
+
+    <div id='root'></div>
+    <script type='text/babel'>
+
+        class Profile extends React.Component {
+
+            // constructor(props){
+            //     super(props);
+            
+            // this.state = {// storing predefine values //helps us to maintsin a particular data when we need
+            //     userName: "sirReact",
+            //     courseName: "React",
+            //     duration: 14,
+            //     completed: false,//jsx cant indentify boolean so we use ternary op
+            //     buttonName: 'notCompleted'
+            // }
+            // this.handleClick= this.handleClick.bind(this);
+
+            // }
+
+            state = {// storing predefine values //helps us to maintsin a particular data when we need
+                userName: "sirReact",
+                courseName: "React",
+                duration: 14,
+                completed: false,//jsx cant indentify boolean so we use ternary op
+                buttonName: 'notCompleted'
+            }
+
+            handlerClick= () =>{
+                // this.state.completed=true;//this will not work as we are changing initial state, use setState
+                console.log(this);
+                this.setState({
+                    completed:true,
+                    buttonName: 'Completed'
+                 } );
+
+            }
+
+           render() {
+               return (
+                   <div>
+                    <Welcome courseName={this.state.userName}/>
+                    <p> courseName: {this.state.courseName}</p>
+                    <p> course completed: {this.state.completed ? 'yes': 'no'}</p>
+                    <button onClick={this.handlerClick}>{this.state.buttonName}</button>{/*handlerClick passing as reference */}
+                   </div>
+               )
+           }
+       }
+
+       //props are immutable; fn comp is stateless comp
+       //pure fn - the fn that dont modify anything.
+       // react fn comp should be pure fn
+        function Welcome(props){//fn reveive props but do not modify we need to use useState
+            return(
+                <div>
+                <h3>Welcome {props.userName}</h3>
+                <h3>React hin man </h3>
+                </div>
+            )
+        }
+        
+        //not working
+        function Clock(props) {
+            const element = (
+                <div>
+                    <h1>The time is</h1>
+                    <h2>{new Date().toLocaleTimeString()}</h2>
+                </div>
+            )
+            //ReactDOM.render(element, document.querySelector('#root'));
+        }
+
+        ReactDOM.render(<Profile/>, document.querySelector('#root'));
+        
+
+        
+
+    </script>
+</body>
+</html>
+<!-- npm =  
+  npx = connect with internet to download
+react install  npx create-react-app my-app
+dont pass node floder and package.json in git or share as it contains version which might be diff for other 
+
+react = easy , singal page app i.e netfix
+ 
+multi pages = complex   i.e guthub, amazon
+amazom - mpa
+google search 
+Hotstar -
+StackoverFlow - spa
+MDN mozilla - spa -->
